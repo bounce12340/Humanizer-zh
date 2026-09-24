@@ -16,6 +16,14 @@
 
 ### 方法一：npx 一键安装（推荐）
 
+本 Skill 已收录于 [skills.sh](https://skills.sh/bounce12340/Humanizer-zh)，可用简写安装：
+
+```bash
+npx skills add bounce12340/Humanizer-zh
+```
+
+也可以指定安装范围和 Agent：
+
 ```bash
 # 交互式选择要安装的 Agent
 npx skills add https://github.com/bounce12340/Humanizer-zh -g
