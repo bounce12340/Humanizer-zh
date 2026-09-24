@@ -18,10 +18,10 @@
 
 ```bash
 # 交互式选择要安装的 Agent
-npx skills add https://github.com/bounce12340/Humanizer-zh -g
+npx skills add https://github.com/op7418/Humanizer-zh -g
 
 # 或直接指定 Agent
-npx skills add https://github.com/bounce12340/Humanizer-zh -g -a claude-code codex hermes-agent pi openclaw
+npx skills add https://github.com/op7418/Humanizer-zh -g -a claude-code codex hermes-agent pi openclaw
 ```
 
 `-g` 安装到用户目录，所有项目可用；去掉 `-g` 则安装到当前项目。[skills CLI](https://github.com/vercel-labs/skills) 把文件放在 `~/.agents/skills/humanizer-zh`，再为需要的 Agent 建立符号链接。更新用 `npx skills update`。
@@ -47,7 +47,7 @@ npx skills add https://github.com/bounce12340/Humanizer-zh -g -a claude-code cod
 **Claude Code**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.claude/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.claude/skills/humanizer-zh
 ```
 
 在对话中输入 `/humanizer-zh`，或直接要求“用 humanizer-zh 润色”。
@@ -55,7 +55,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.claude/skills/human
 **OpenAI Codex**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.agents/skills/humanizer-zh
 ```
 
 用 `$humanizer-zh` 明确调用，或输入 `/skills` 选择；Codex 也会按描述自动选用。旧位置 `~/.codex/skills/` 仍会读取，但官方已不推荐。Skill 没出现时重启 Codex。
@@ -63,7 +63,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/human
 **Hermes Agent**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.hermes/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.hermes/skills/humanizer-zh
 ```
 
 在对话中输入 `/humanizer-zh`；已在运行的会话执行 `/reload-skills` 重新扫描。放在项目内的 `.hermes/skills/` 需要先执行 `hermes skills trust`。不要只用 `SKILL.md` 的原始网址安装，那样不会下载 `references/`。
@@ -71,7 +71,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.hermes/skills/human
 **Pi**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.pi/agent/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.pi/agent/skills/humanizer-zh
 ```
 
 用 `/skill:humanizer-zh` 调用；修改或新增 Skill 后执行 `/reload`。Pi 也会读取 `~/.agents/skills/`。
@@ -79,7 +79,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.pi/agent/skills/hum
 **OpenClaw**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.openclaw/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.openclaw/skills/humanizer-zh
 ```
 
 用 `/skill humanizer-zh` 调用；斜杠命令会把连字符换成下划线，也可以输入 `/humanizer_zh`。Skill 在会话开始时载入，新装的 Skill 在新会话中生效。
@@ -89,7 +89,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.openclaw/skills/hum
 这些 Agent 都会读取跨工具目录 `~/.agents/skills/`：
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.agents/skills/humanizer-zh
 ```
 
 ### 多个 Agent 共用一份
@@ -97,7 +97,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/human
 `~/.agents/skills/` 可被 Codex、Pi、OpenClaw、Gemini CLI、OpenCode、GitHub Copilot 和 Cursor 读取。Claude Code 与 Hermes Agent 默认不读这个目录，可用符号链接共用同一份文件：
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.agents/skills/humanizer-zh
 mkdir -p ~/.claude/skills ~/.hermes/skills
 ln -s ~/.agents/skills/humanizer-zh ~/.claude/skills/humanizer-zh
 ln -s ~/.agents/skills/humanizer-zh ~/.hermes/skills/humanizer-zh

@@ -26,10 +26,10 @@
 
 ```bash
 # 互動式選擇要安裝的 Agent
-npx skills add https://github.com/bounce12340/Humanizer-zh -g
+npx skills add https://github.com/op7418/Humanizer-zh -g
 
 # 或直接指定 Agent
-npx skills add https://github.com/bounce12340/Humanizer-zh -g -a claude-code codex hermes-agent pi openclaw
+npx skills add https://github.com/op7418/Humanizer-zh -g -a claude-code codex hermes-agent pi openclaw
 ```
 
 `-g` 會安裝到使用者目錄，所有專案都能用；拿掉 `-g` 則只安裝到目前的專案。[skills CLI](https://github.com/vercel-labs/skills) 把檔案放在 `~/.agents/skills/humanizer-zh`，再替需要的 Agent 建立符號連結。更新時執行 `npx skills update`。
@@ -55,7 +55,7 @@ npx skills add https://github.com/bounce12340/Humanizer-zh -g -a claude-code cod
 **Claude Code**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.claude/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.claude/skills/humanizer-zh
 ```
 
 在對話中輸入 `/humanizer-zh`，或直接說「用 humanizer-zh 潤飾」。
@@ -63,7 +63,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.claude/skills/human
 **OpenAI Codex**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.agents/skills/humanizer-zh
 ```
 
 用 `$humanizer-zh` 明確呼叫，或輸入 `/skills` 選擇；Codex 也會依描述自動選用。舊位置 `~/.codex/skills/` 仍會讀取，但官方已不建議使用。Skill 沒出現時請重新啟動 Codex。
@@ -71,7 +71,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/human
 **Hermes Agent**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.hermes/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.hermes/skills/humanizer-zh
 ```
 
 在對話中輸入 `/humanizer-zh`；執行中的工作階段可用 `/reload-skills` 重新掃描。放在專案內 `.hermes/skills/` 的 Skill，要先執行 `hermes skills trust` 才會載入。請不要只用 `SKILL.md` 的原始網址安裝，那樣不會下載 `references/`。
@@ -79,7 +79,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.hermes/skills/human
 **Pi**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.pi/agent/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.pi/agent/skills/humanizer-zh
 ```
 
 用 `/skill:humanizer-zh` 呼叫；新增或修改 Skill 後執行 `/reload`。Pi 也會讀取 `~/.agents/skills/`。
@@ -87,7 +87,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.pi/agent/skills/hum
 **OpenClaw**
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.openclaw/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.openclaw/skills/humanizer-zh
 ```
 
 用 `/skill humanizer-zh` 呼叫。斜線指令會把連字號換成底線，所以也可以輸入 `/humanizer_zh`。Skill 在工作階段開始時載入，新裝的 Skill 要在新的工作階段才會生效。
@@ -97,7 +97,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.openclaw/skills/hum
 這些 Agent 都會讀取跨工具目錄 `~/.agents/skills/`：
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.agents/skills/humanizer-zh
 ```
 
 ### 多個 Agent 共用一份
@@ -105,7 +105,7 @@ git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/human
 `~/.agents/skills/` 可供 Codex、Pi、OpenClaw、Gemini CLI、OpenCode、GitHub Copilot 和 Cursor 讀取。Claude Code 與 Hermes Agent 預設不讀這個目錄，可以用符號連結共用同一份檔案：
 
 ```bash
-git clone https://github.com/bounce12340/Humanizer-zh.git ~/.agents/skills/humanizer-zh
+git clone https://github.com/op7418/Humanizer-zh.git ~/.agents/skills/humanizer-zh
 mkdir -p ~/.claude/skills ~/.hermes/skills
 ln -s ~/.agents/skills/humanizer-zh ~/.claude/skills/humanizer-zh
 ln -s ~/.agents/skills/humanizer-zh ~/.hermes/skills/humanizer-zh
@@ -204,7 +204,7 @@ python3 tests/check_zh_tw.py 改寫後的檔案.md
 ## 來源與授權
 
 - [blader/humanizer v3.0.0](https://github.com/blader/humanizer/blob/v3.0.0/SKILL.md)：原始專案，以及 A–E 分類、聲音校準、檔案模式的來源。
-- [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh)：本專案的上游中文版本，包含 [PR #39](https://github.com/op7418/Humanizer-zh/pull/39) 的結構與中文檢查項目。
+- [Humanizer-zh PR #39](https://github.com/op7418/Humanizer-zh/pull/39)：本次修訂的結構基礎與中文檢查項目來源。
 - [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)：簡潔表達與編修檢查的參考來源。
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)：原始專案的觀察來源。
 
