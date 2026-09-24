@@ -82,7 +82,8 @@ class DocumentExamplesTest(unittest.TestCase):
 class RepositoryTest(unittest.TestCase):
     def test_local_links_exist(self):
         for doc in ["SKILL.md", "README.md", "README.zh-TW.md", "CHANGELOG.md",
-                    "tests/README.md", "references/zh-tw.md"]:
+                    "tests/README.md", "references/zh-tw.md",
+                    "references/patterns.md"]:
             text = (ROOT / doc).read_text(encoding="utf-8")
             for target in re.findall(r"\]\(([^)\s]+)\)", text):
                 if re.match(r"[a-z]+:|#", target):

@@ -9,6 +9,8 @@
 - 新增 `tests/check_zh_tw.py`，从参考文件读取词表，列出用语、错字和混入的简体字，跳过代码与链接。它只做字符串比对，不能判断语境。
 - 新增 7 个繁体测试案例。修订版由独立代理盲测一次：7 条输出经检查脚本与人工核对，未发现新增事实、义项换错或港澳用语被改；其中 4 条与参考文件范例相近，只能作为基本检查。
 - README 补充 Claude Code、OpenAI Codex、Hermes Agent、Pi、OpenClaw、Gemini CLI、OpenCode、GitHub Copilot、Cursor 的安装与调用方式，并新增繁体中文说明 [README.zh-TW.md](README.zh-TW.md)。`npx skills` 的安装位置经实测确认；`SKILL.md` 通过 agentskills.io 参考验证器 `skills-ref validate`。
+- `SKILL.md` 的 31 个检查点改为每条一行的条件与保留边界，前后示例移到 [references/patterns.md](references/patterns.md)，`SKILL.md` 从约 21.9 KB 降到 12.9 KB。调整前后用 10 个未出现在示例中的新案例各盲测两次，两版结果无实质差异；精简版另跑 18 个边界案例一次，未发现新增事实或丢失条件。测试中代理都没有读取 `patterns.md`，所以示例文件主要供人工查阅和疑难判断；单一模型、少量样本，仍需在其他 Agent 与模型上观察。
+- 新增 GitHub Actions：单元测试、结构脚本冒烟测试和 `skills-ref validate`。`check_zh_tw.py` 增加「台／臺」等并存写法混用检查。
 - Front matter 增加 `license: MIT`，描述加入繁体关键词，便于 Agent 按描述自动选用。
 
 ## 2026-09-23

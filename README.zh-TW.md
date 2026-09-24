@@ -189,7 +189,7 @@ ln -s ~/.agents/skills/humanizer-zh ~/.hermes/skills/humanizer-zh
 - 編修檔案時，預設保留程式碼、指令、路徑、連結目標、YAML、資料、標題和錨點。
 - 預設只交付最終稿，不附中間草稿、命中清單或自評分數。
 
-完整的 31 項檢查（A–F 類）、條件與範例見 [SKILL.md](SKILL.md)。
+31 項檢查（A–F 類）的條件列在 [SKILL.md](SKILL.md)，改寫前後與應保留的範例在 [references/patterns.md](references/patterns.md)。
 
 ## 驗證
 

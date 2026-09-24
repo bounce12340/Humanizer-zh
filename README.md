@@ -203,7 +203,7 @@ ln -s ~/.agents/skills/humanizer-zh ~/.hermes/skills/humanizer-zh
 | E：聊天与草稿残留（22–25） | 客服腔、重复免责与猜测填充、首句复读标题、编辑过程残留 |
 | F：中文补充检查（26–31） | 长定语、“进行＋动词”、被字句堆叠、四字词排比、万能背景、套话收尾 |
 
-每条包括修改条件、前后示例和保留边界，详见 [SKILL.md](SKILL.md)。
+`SKILL.md` 中每条只保留一行修改条件与保留边界；前后示例和保留示例在 [references/patterns.md](references/patterns.md)，Agent 不确定时再读取。
 
 ## 验证
 
