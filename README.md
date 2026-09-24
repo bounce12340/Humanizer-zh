@@ -1,5 +1,7 @@
 # Humanizer-zh：中文文本润色 Skill
 
+[![skills.sh](https://skills.sh/b/op7418/Humanizer-zh)](https://skills.sh/op7418/Humanizer-zh)
+
 编辑已有文章、评论和文档中的空话、重复及模板化表达，保留事实、确定程度和作者声音。输入是一段文字或一个文件，默认输出最终改写稿；没有问题的句子可以不改。
 
 这是一份由 Agent 读取执行的编辑指导，不是独立的检测程序。它不能证明文章由谁撰写，也不保证通过任何 AI 检测器。
