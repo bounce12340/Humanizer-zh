@@ -24,10 +24,10 @@
 
 ### 方法一：npx 一鍵安裝（建議）
 
-本 Skill 已收錄於 [skills.sh](https://skills.sh/bounce12340/Humanizer-zh)，可用簡寫安裝：
+本 Skill 已收錄於 [skills.sh](https://skills.sh/op7418/Humanizer-zh)，可用簡寫安裝：
 
 ```bash
-npx skills add bounce12340/Humanizer-zh
+npx skills add op7418/Humanizer-zh
 ```
 
 也可以指定安裝範圍和 Agent：
