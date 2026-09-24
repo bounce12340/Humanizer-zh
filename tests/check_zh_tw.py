@@ -1,6 +1,7 @@
-"""List mainland terms and conversion typos in Taiwan Traditional Chinese text.
+"""List mainland terms, conversion typos and mixed variant spellings in
+Taiwan Traditional Chinese text.
 
-Term tables are read from references/zh-tw.md so the Skill and this script
+Tables are read from references/zh-tw.md so the Skill and this script
 share one list. Matching is plain substring search: every hit still needs a
 human to judge the context.
 """
@@ -12,7 +13,7 @@ import sys
 from pathlib import Path
 
 DEFAULT_REFERENCE = Path(__file__).resolve().parent.parent / "references" / "zh-tw.md"
-TABLE_HEADERS = {"對岸用語": "term", "錯誤寫法": "typo"}
+TABLE_HEADERS = {"對岸用語": "term", "錯誤寫法": "typo", "寫法一": "variant"}
 CONTEXT_MARK = "看語境"
 # High-frequency simplified-only characters; any of them in zh-TW output
 # means an unconverted fragment slipped in.
@@ -20,7 +21,8 @@ SIMPLIFIED_ONLY = set("这们说时为来会对发经过开关门问题见现学
 
 
 def load_rules(reference):
-    rules = []
+    """Return (rules, variants) parsed from the Markdown tables."""
+    rules, variants = [], []
     kind = None
     for line in reference.read_text(encoding="utf-8").splitlines():
         cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
@@ -33,6 +35,9 @@ def load_rules(reference):
         if kind is None or set(cells[0]) <= set("-: "):
             continue
         note = cells[2] if len(cells) > 2 else ""
+        if kind == "variant":
+            variants.append((cells[0], cells[1], note))
+            continue
         rules.append({
             "kind": kind,
             "match": cells[0],
@@ -42,7 +47,7 @@ def load_rules(reference):
         })
     if not rules:
         raise SystemExit(f"no term tables found in {reference}")
-    return rules
+    return rules, variants
 
 
 def prose_only(text):
@@ -54,13 +59,14 @@ def prose_only(text):
     return re.sub(r"https?://\S+", blank, text)
 
 
-def scan(text, rules):
+def scan(text, rules, variants=()):
     by_match = {rule["match"]: rule for rule in rules}
     # Longest alternatives first so 數據庫 wins over 數據 at the same offset.
     pattern = re.compile("|".join(
         re.escape(m) for m in sorted(by_match, key=len, reverse=True)))
+    lines = prose_only(text).splitlines()
     findings = []
-    for lineno, line in enumerate(prose_only(text).splitlines(), start=1):
+    for lineno, line in enumerate(lines, start=1):
         for hit in pattern.finditer(line):
             rule = by_match[hit.group(0)]
             findings.append({"line": lineno, "column": hit.start() + 1, **rule})
@@ -71,7 +77,36 @@ def scan(text, rules):
                     "match": char, "suggest": "改用繁體字", "needs_context": False,
                     "note": "",
                 })
+    findings += mixed_variants(lines, variants)
     return sorted(findings, key=lambda f: (f["line"], f["column"]))
+
+
+def mixed_variants(lines, variants):
+    """Flag the less frequent spelling when both forms of a pair appear.
+
+    Always context-dependent: official names may legitimately differ from
+    the spelling used in the surrounding prose.
+    """
+    findings = []
+    for first, second, note in variants:
+        hits = {form: [(n, m.start() + 1)
+                       for n, line in enumerate(lines, start=1)
+                       for m in re.finditer(re.escape(form), line)]
+                for form in (first, second)}
+        if not (hits[first] and hits[second]):
+            continue
+        minority, majority = ((first, second)
+                              if len(hits[first]) < len(hits[second])
+                              else (second, first))
+        counts = f"全文「{first}」{len(hits[first])} 處、「{second}」{len(hits[second])} 處"
+        for lineno, column in hits[minority]:
+            findings.append({
+                "line": lineno, "column": column, "kind": "variant",
+                "match": minority, "suggest": f"統一為「{majority}」",
+                "needs_context": True,
+                "note": "；".join(filter(None, [counts, "專有名稱依官方寫法", note])),
+            })
+    return findings
 
 
 def main():
@@ -83,20 +118,21 @@ def main():
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
-    rules = load_rules(args.reference)
+    rules, variants = load_rules(args.reference)
     sources = [(str(p), p.read_text(encoding="utf-8")) for p in args.files]
     if not sources:
         sources = [("<stdin>", sys.stdin.read())]
 
-    labels = {"term": "用語", "typo": "錯字", "simplified": "簡體字"}
+    labels = {"term": "用語", "typo": "錯字", "simplified": "簡體字", "variant": "混用"}
     report, definite = [], 0
     for name, text in sources:
-        for f in scan(text, rules):
+        for f in scan(text, rules, variants):
             f["file"] = name
             report.append(f)
             definite += not f["needs_context"]
             if not args.json:
-                tag = labels[f["kind"]] + ("・看語境" if f["needs_context"] else "")
+                context = f["needs_context"] and f["kind"] != "variant"
+                tag = labels[f["kind"]] + ("・看語境" if context else "")
                 note = f"（{f['note']}）" if f["note"] else ""
                 print(f"{name}:{f['line']}:{f['column']}: [{tag}] "
                       f"{f['match']} → {f['suggest']}{note}")

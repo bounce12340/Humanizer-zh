@@ -199,7 +199,7 @@ ln -s ~/.agents/skills/humanizer-zh ~/.hermes/skills/humanizer-zh
 python3 tests/check_zh_tw.py 改寫後的檔案.md
 ```
 
-腳本讀取 `references/zh-tw.md` 的詞表，列出對岸用語、簡轉繁錯字和混入的簡體字，會跳過程式碼與連結。它只做字串比對，標示「看語境」的結果要由人判斷，不能取代人工核對語意。單次、有限的樣本也不能代表所有模型和文體。
+腳本讀取 `references/zh-tw.md` 的詞表，列出對岸用語、簡轉繁錯字、混入的簡體字，以及「台／臺」「計畫／計劃」等並存寫法的混用，會跳過程式碼與連結。每個 PR 都會由 GitHub Actions 執行單元測試與 Agent Skills 格式驗證。它只做字串比對，標示「看語境」的結果要由人判斷，不能取代人工核對語意。單次、有限的樣本也不能代表所有模型和文體。
 
 ## 來源與授權
 
