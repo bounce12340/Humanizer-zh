@@ -200,7 +200,7 @@ ln -s ~/.agents/skills/humanizer-zh ~/.hermes/skills/humanizer-zh
 
 ## 模式目录
 
-保留 31 个检查点，沿用 PR #39 的 A–F 分类，便于对照。这是编辑问题清单，不是作者身份检测标准。
+共 39 个检查点：1–31 沿用 PR #39 的 A–F 分类；32–39 为 G 组，来自 [lieflat-less-ai-tone](https://github.com/larashero3-dotcom/lieflat-less-ai-tone) 的语料实测（629 篇、约 283 万字，五个模型对照人类写作）。这是编辑问题清单，不是作者身份检测标准。
 
 | 分类 | 检查点 |
 |---|---|
@@ -210,12 +210,15 @@ ln -s ~/.agents/skills/humanizer-zh ~/.hermes/skills/humanizer-zh
 | D：公式化排版（19–21） | 无效粗体、装饰性标题、引号和标点 |
 | E：聊天与草稿残留（22–25） | 客服腔、重复免责与猜测填充、首句复读标题、编辑过程残留 |
 | F：中文补充检查（26–31） | 长定语、“进行＋动词”、被字句堆叠、四字词排比、万能背景、套话收尾 |
+| G：语料实测特征（32–39） | 段首零回指评论、冒号滥用、序数词小标题、拟人化喻体、概括盖掉已有数据、顿号罗列、相邻句同构、四种译文句式 |
+
+同一份实测也显示，比喻、正文问句、句内排比、正文里的“首先……其次”、句长参差等在人类文本中同样常见甚至更多。`SKILL.md` 把它们列为“实测不构成修改理由”，避免越改越不像人写的。
 
 `SKILL.md` 中每条只保留一行修改条件与保留边界；前后示例和保留示例在 [references/patterns.md](references/patterns.md)，Agent 不确定时再读取。
 
 ## 验证
 
-[测试说明](tests/README.md)包含 25 个短文本案例（其中 7 个为繁体）、一个 Markdown 文件样例、结构检查脚本和台湾繁体用语检查脚本。本次更新还做了旧版与修订版的长文对照，检查数字、条件、归因、作者态度和文件结构。单次、有限样例不能代表所有模型和文体；不能用字数下降或模型自评分证明效果。
+[测试说明](tests/README.md)包含 32 个短文本案例（其中 7 个为繁体、7 个针对 G 组）、一个 Markdown 文件样例、结构检查脚本和台湾繁体用语检查脚本。本次更新还做了旧版与修订版的长文对照，检查数字、条件、归因、作者态度和文件结构。单次、有限样例不能代表所有模型和文体；不能用字数下降或模型自评分证明效果。
 
 ## 来源与许可
 
@@ -223,6 +226,7 @@ ln -s ~/.agents/skills/humanizer-zh ~/.hermes/skills/humanizer-zh
 - [Humanizer-zh PR #39](https://github.com/op7418/Humanizer-zh/pull/39)：本次修订的结构基础与中文检查点来源。
 - [Humanizer-zh PR #34](https://github.com/op7418/Humanizer-zh/pull/34)：示例保真修复的对照参考。本修订没有直接合并该分支。
 - [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)：简洁表达与编辑检查的参考来源。
+- [larashero3-dotcom/lieflat-less-ai-tone](https://github.com/larashero3-dotcom/lieflat-less-ai-tone)（MIT）：G 组检查点、“实测不构成修改理由”及倍数数据的来源，许可见 [licenses/](licenses/lieflat-less-ai-tone.txt)。
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)：原项目的观察来源。
 
 遵循仓库中的 [MIT License](LICENSE)。

@@ -197,11 +197,13 @@ ln -s ~/.agents/skills/humanizer-zh ~/.hermes/skills/humanizer-zh
 - 編修檔案時，預設保留程式碼、指令、路徑、連結目標、YAML、資料、標題和錨點。
 - 預設只交付最終稿，不附中間草稿、命中清單或自評分數。
 
-31 項檢查（A–F 類）的條件列在 [SKILL.md](SKILL.md)，改寫前後與應保留的範例在 [references/patterns.md](references/patterns.md)。
+39 項檢查的條件列在 [SKILL.md](SKILL.md)，改寫前後與應保留的範例在 [references/patterns.md](references/patterns.md)。第 1–31 項沿用上游的 A–F 分類；第 32–39 項（G 組）來自 [lieflat-less-ai-tone](https://github.com/larashero3-dotcom/lieflat-less-ai-tone) 的語料實測（629 篇、約 283 萬字），例如段首零回指評論（4.4 倍）、空轉句引出清單的冒號（9.4 倍）、拿理想化職業人格當喻體（7.3 倍）。
+
+同一份實測也顯示，比喻、正文問句、句內排比、正文裡的「首先……其次」和句長參差，人類用得不比 AI 少，有些還更多。`SKILL.md` 把這些列為「實測不構成修改理由」，免得越改越不像人寫的。
 
 ## 驗證
 
-[測試說明](tests/README.md)包含 25 個短文案例（其中 7 個是繁體）、一個 Markdown 檔案範例、結構檢查腳本，以及台灣繁體用語檢查腳本：
+[測試說明](tests/README.md)包含 32 個短文案例（其中 7 個是繁體、7 個針對 G 組）、一個 Markdown 檔案範例、結構檢查腳本，以及台灣繁體用語檢查腳本：
 
 ```bash
 python3 tests/check_zh_tw.py 改寫後的檔案.md
@@ -214,6 +216,7 @@ python3 tests/check_zh_tw.py 改寫後的檔案.md
 - [blader/humanizer v3.0.0](https://github.com/blader/humanizer/blob/v3.0.0/SKILL.md)：原始專案，以及 A–E 分類、聲音校準、檔案模式的來源。
 - [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh)：本專案的上游中文版本，包含 [PR #39](https://github.com/op7418/Humanizer-zh/pull/39) 的結構與中文檢查項目。
 - [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)：簡潔表達與編修檢查的參考來源。
+- [larashero3-dotcom/lieflat-less-ai-tone](https://github.com/larashero3-dotcom/lieflat-less-ai-tone)（MIT）：G 組檢查、「實測不構成修改理由」與倍數資料的來源，授權見 [licenses/](licenses/lieflat-less-ai-tone.txt)。
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)：原始專案的觀察來源。
 
 採用本儲存庫的 [MIT License](LICENSE)。
